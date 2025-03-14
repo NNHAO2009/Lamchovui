@@ -29,6 +29,33 @@
             pointer-events: none; /* Ngăn không cho tương tác với video */
         }
 
+        /* Điều chỉnh kích thước video và các nút điều khiển */
+        video {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Điều chỉnh giao diện phần điều khiển của video */
+        video::-webkit-media-controls {
+            height: 20px;  /* Điều chỉnh chiều cao của các nút điều khiển */
+            font-size: 12px;  /* Điều chỉnh kích thước chữ trên nút */
+        }
+
+        /* Điều chỉnh kích thước các phần tử trên điều khiển */
+        video::-webkit-media-controls-play-button {
+            width: 20px; 
+            height: 20px;
+        }
+
+        video::-webkit-media-controls-volume-slider {
+            width: 60px;
+            height: 10px;
+        }
+
+        video::-webkit-media-controls-timeline {
+            height: 8px;
+        }
+
         /* Nội dung trang */
         .container {
             position: absolute;
@@ -98,8 +125,8 @@
 </head>
 <body>
 
-     <!-- Video nền với âm thanh -->
-    <video class="video-background" autoplay loop>
+    <!-- Video nền với âm thanh và điều khiển -->
+    <video class="video-background" autoplay loop controls>
         <source src="Snaptik.app_7425621186698300690.mp4" type="video/mp4">
         Trình duyệt của bạn không hỗ trợ thẻ video.
     </video>
@@ -149,6 +176,7 @@
 
 </body>
 </html>
+
 
 
 
