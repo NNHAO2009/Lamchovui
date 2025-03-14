@@ -26,6 +26,7 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+            pointer-events: none; /* Ngăn không cho tương tác với video */
         }
 
         /* Nội dung trang */
@@ -97,12 +98,11 @@
 </head>
 <body>
 
-   <!-- Video nền (với âm thanh, không bị muted) -->
-    <video class="video-background" autoplay loop controls>
+    <!-- Video nền -->
+    <video class="video-background" autoplay loop muted>
         <source src="Snaptik.app_7425621186698300690.mp4" type="video/mp4">
         Trình duyệt của bạn không hỗ trợ thẻ video.
     </video>
-
 
     <div class="container">
         <!-- Hình ảnh giới thiệu -->
