@@ -64,11 +64,17 @@
             color: white;
         }
 
-        /* Phần hình ảnh giới thiệu */
-        .intro-hao {
-            text-align: center;
-            align-items: center;
-            display: flex;
+       /* Căn giữa ảnh đại diện */
+.intro-hao {
+    position: absolute;  /* Sử dụng position: absolute để không ảnh hưởng đến các phần tử khác */
+    top: 50%;            /* Căn giữa theo chiều dọc */
+    left: 50%;           /* Căn giữa theo chiều ngang */
+    transform: translate(-50%, -50%);  /* Đảm bảo ảnh được căn chính xác */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;  /* Đảm bảo ảnh không bị che khuất */
+}
         }
 
         .intro-image {
@@ -77,7 +83,6 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 20px;
-            display: flex;
         }
 
         .container h1 {
