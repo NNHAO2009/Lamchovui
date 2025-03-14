@@ -93,18 +93,11 @@
             transform: scale(1.2);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
-
-        /* Ẩn iframe nhạc nền */
-        #musicPlayer {
-            position: relative;
-            visibility: hidden;  /* Ẩn iframe nhưng vẫn giữ vị trí */
-            z-index: -1;  /* Đặt iframe dưới các phần tử khác */
-        }
     </style>
 </head>
 <body>
 
-     <!-- Video nền (có âm thanh) -->
+    <!-- Video nền (có âm thanh) -->
     <video class="video-background" autoplay loop>
         <source src="Snaptik.app_7425621186698300690.mp4" type="video/mp4">
         Trình duyệt của bạn không hỗ trợ thẻ video.
@@ -150,16 +143,6 @@
             setTimeout(() => {
                 window.open(iconElement.href, '_blank');
             }, 300);
-        }
-
-        // Hàm để ẩn/hiện iframe nhạc nền
-        function toggleMusicPlayer() {
-            const iframe = document.getElementById('musicPlayer');
-            if (iframe.style.visibility === 'hidden') {
-                iframe.style.visibility = 'visible';  // Hiện iframe
-            } else {
-                iframe.style.visibility = 'hidden';  // Ẩn iframe
-            }
         }
     </script>
 
