@@ -102,6 +102,17 @@
             transform: scale(1.2);  /* Hiệu ứng khi click */
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
+
+        /* Điều khiển âm thanh */
+        .audio-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -112,8 +123,8 @@
         Trình duyệt của bạn không hỗ trợ thẻ video.
     </video>
 
-    <!-- Âm thanh nền (không có điều khiển) -->
-    <audio autoplay loop controls >
+    <!-- Âm thanh nền (với điều khiển) -->
+    <audio autoplay loop controls>
         <source src="https://raw.githubusercontent.com/NNHAO2009/Lamchovui/25fcc80ea6ba9cb13bb7591fe2587d09bacaee6f/Snaptik.app_7467589860937813266.mp3" type="audio/mp3">
         Trình duyệt của bạn không hỗ trợ thẻ âm thanh.
     </audio>
