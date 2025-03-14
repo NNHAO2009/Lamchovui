@@ -14,7 +14,6 @@
             align-items: center;
             overflow: hidden;
             font-family: Arial, sans-serif;
-            cursor: url('https://example.com/heart.png'), auto; /* Đổi con trỏ thành trái tim */
         }
 
         /* Video nền */
@@ -87,6 +86,7 @@
             overflow: hidden;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #3b5998; /* Màu nền của biểu tượng Facebook */
         }
 
         .app-icon img {
@@ -103,6 +103,18 @@
             transform: scale(1.2);  /* Hiệu ứng khi click */
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
+
+        /* Điều khiển âm thanh */
+        audio {
+            position: fixed;
+            bottom: 10px;  /* Đặt điều khiển âm thanh ở dưới cùng */
+            left: 50%;
+            transform: translateX(-50%);  /* Căn giữa */
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 3;  /* Đảm bảo điều khiển âm thanh nằm trên tất cả các phần tử */
+        }
     </style>
 </head>
 <body>
@@ -113,7 +125,7 @@
         Trình duyệt của bạn không hỗ trợ thẻ video.
     </video>
 
-    <!-- Âm thanh nền (không có điều khiển) -->
+    <!-- Âm thanh nền (với điều khiển) -->
     <audio autoplay loop controls>
         <source src="https://raw.githubusercontent.com/NNHAO2009/Lamchovui/25fcc80ea6ba9cb13bb7591fe2587d09bacaee6f/Snaptik.app_7467589860937813266.mp3" type="audio/mp3">
         Trình duyệt của bạn không hỗ trợ thẻ âm thanh.
@@ -140,8 +152,8 @@
             <a href="https://www.tiktok.com/@kirahetor2009" target="_blank" class="app-icon" onclick="appClick(this)">
                 <img src="https://cdn-icons-png.flaticon.com/512/3046/3046127.png" alt="TikTok">
             </a>
-            <!-- Facebook Icon -->
-            <a href="https://www.facebook.com/YOUR_PROFILE" target="_blank" class="app-icon" onclick="appClick(this)">
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/your-facebook-profile" target="_blank" class="app-icon" onclick="appClick(this)">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
             </a>
         </div>
@@ -162,6 +174,7 @@
 
 </body>
 </html>
+
 
 
 
