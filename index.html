@@ -94,6 +94,12 @@
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
+        /* Ẩn iframe nhạc nền */
+        #musicPlayer {
+            position: relative;
+            visibility: hidden;  /* Ẩn iframe nhưng vẫn giữ vị trí */
+            z-index: -1;  /* Đặt iframe dưới các phần tử khác */
+        }
     </style>
 </head>
 <body>
@@ -105,16 +111,18 @@
     </video>
 
     <!-- Nhạc nền từ SoundCloud -->
-     <iframe width="100%" height="166" scrolling="no" frameborder="no" 
-        allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2054332472&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true" 
-        style="position: relative; z-index: 10;">
+    <iframe id="musicPlayer" width="100%" height="166" scrolling="no" frameborder="no" 
+        allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2054332472&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
     </iframe>
-    
+    <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda, Verdana, Tahoma, sans-serif; font-weight: 100;">
+        <a href="https://soundcloud.com/tarama-misuri" title="Tarama Misuri" target="_blank" style="color: #cccccc; text-decoration: none;">Tarama Misuri</a> · 
+        <a href="https://soundcloud.com/tarama-misuri/snaptik" title="Snaptik" target="_blank" style="color: #cccccc; text-decoration: none;">Snaptik</a>
+    </div>
+
     <div class="container">
         <!-- Hình ảnh giới thiệu -->
         <div class="intro-hao">
           <img src="https://raw.githubusercontent.com/NNHAO2009/Lamchovui/main/b0269bdb9b12ee094b20cfca762250a8.jpg" alt="Hình ảnh giới thiệu" class="intro-image">
-            
         </div>
 
         <!-- Nội dung trang -->
@@ -152,8 +160,19 @@
                 window.open(iconElement.href, '_blank');
             }, 300);
         }
+
+        // Hàm để ẩn/hiện iframe nhạc nền
+        function toggleMusicPlayer() {
+            const iframe = document.getElementById('musicPlayer');
+            if (iframe.style.visibility === 'hidden') {
+                iframe.style.visibility = 'visible';  // Hiện iframe
+            } else {
+                iframe.style.visibility = 'hidden';  // Ẩn iframe
+            }
+        }
     </script>
 
 </body>
 </html>
+
 
