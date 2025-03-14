@@ -104,14 +104,15 @@
         }
 
         /* Điều khiển âm thanh */
-        .audio-controls {
-            position: absolute;
-            bottom: 20px;
+        audio {
+            position: fixed;
+            bottom: 10px;  /* Đặt điều khiển âm thanh ở dưới cùng */
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%);  /* Căn giữa */
             background-color: rgba(0, 0, 0, 0.5);
             padding: 10px;
             border-radius: 5px;
+            z-index: 3;  /* Đảm bảo điều khiển âm thanh nằm trên tất cả các phần tử */
         }
     </style>
 </head>
