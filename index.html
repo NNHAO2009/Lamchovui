@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giới thiệu bản thân</title>
     <style>
-        /* Đảm bảo rằng body và html có chiều cao 100% và không có margin/padding */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            justify-content: center; /* Căn giữa theo chiều ngang */
-            align-items: center; /* Căn giữa theo chiều dọc */
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
             font-family: Arial, sans-serif;
         }
@@ -27,34 +27,11 @@
             z-index: -1;
         }
 
-        /* Điều chỉnh kích thước video và các nút điều khiển */
         video {
             width: 100%;
             height: 100%;
         }
 
-        /* Điều chỉnh giao diện phần điều khiển của video */
-        video::-webkit-media-controls {
-            height: 20px;  /* Điều chỉnh chiều cao của các nút điều khiển */
-            font-size: 12px;  /* Điều chỉnh kích thước chữ trên nút */
-        }
-
-        /* Điều chỉnh kích thước các phần tử trên điều khiển */
-        video::-webkit-media-controls-play-button {
-            width: 20px; 
-            height: 20px;
-        }
-
-        video::-webkit-media-controls-volume-slider {
-            width: 60px;
-            height: 10px;
-        }
-
-        video::-webkit-media-controls-timeline {
-            height: 8px;
-        }
-
-        /* Nội dung trang */
         .container {
             position: absolute;
             top: 50%;
@@ -64,27 +41,20 @@
             color: white;
         }
 
-       /* Căn giữa ảnh đại diện */
-.intro-hao {
-    position: absolute;  /* Sử dụng position: absolute để không ảnh hưởng đến các phần tử khác */
-    top: 50%;            /* Căn giữa theo chiều dọc */
-    left: 50%;           /* Căn giữa theo chiều ngang */
-    transform: translate(-50%, -50%);  /* Đảm bảo ảnh được căn chính xác */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;  /* Đảm bảo ảnh không bị che khuất */
-}
+        .intro-hao {
+            text-align: center;
+            align-items: center;
+            display: flex;
+        }
 
-       /* Làm ảnh thành hình tròn */
-.intro-image {
-    width: 150px; /* Điều chỉnh kích thước ảnh */
-    height: 150px;
-    border-radius: 50%;  /* Làm ảnh thành hình tròn */
-    object-fit: cover;
-    margin-bottom: 20px; /* Khoảng cách giữa ảnh và phần chữ */
-    display: flex;
-}
+        .intro-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            display: flex;
+        }
 
         .container h1 {
             font-size: 3rem;
@@ -104,7 +74,7 @@
         }
 
         .app-icon {
-            width: 60px; /* Kích thước icon */
+            width: 60px;
             height: 60px;
             border-radius: 50%;
             overflow: hidden;
@@ -122,7 +92,6 @@
             transform: scale(1.1);
         }
 
-        /* Hiệu ứng khi nhấp vào ứng dụng */
         .app-icon.clicked {
             transform: scale(1.2);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
@@ -136,24 +105,21 @@
         <source src="bronya-and-seele-honkai-impact-3-wallpaperwaifu-com (1).mp4" type="video/mp4">
         Trình duyệt của bạn không hỗ trợ thẻ video.
     </video>
-  <!-- Âm thanh nền -->
-<audio autoplay loop controls>
-    <source src="https://raw.githubusercontent.com/NNHAO2009/Lamchovui/25fcc80ea6ba9cb13bb7591fe2587d09bacaee6f/Snaptik.app_7467589860937813266.mp3" type="audio/mp3">
-    Trình duyệt của bạn không hỗ trợ thẻ âm thanh.
-</audio>
-    
-    <div class="container">
-        <!-- Hình ảnh giới thiệu -->
-        <div class="intro-hao">
-    <img src="b0269bdb9b12ee094b20cfca762250a8.jpg" alt="Hình ảnh giới thiệu" class="intro-image">
-</div></div>
-        
 
-        <!-- Nội dung trang -->
+    <!-- Âm thanh nền (không có điều khiển) -->
+    <audio autoplay loop>
+        <source src="https://raw.githubusercontent.com/NNHAO2009/Lamchovui/25fcc80ea6ba9cb13bb7591fe2587d09bacaee6f/Snaptik.app_7467589860937813266.mp3" type="audio/mp3">
+        Trình duyệt của bạn không hỗ trợ thẻ âm thanh.
+    </audio>
+
+    <div class="container">
+        <div class="intro-hao">
+            <img src="b0269bdb9b12ee094b20cfca762250a8.jpg" alt="Hình ảnh giới thiệu" class="intro-image">
+        </div>
+
         <h1>HELLO!!!</h1>
         <p>Mình là một lập trình viên ngu và thích khám phá. Dưới đây là các trang web mình hay xem :)))</p>
 
-        <!-- Các ứng dụng -->
         <div class="app-icons">
             <a href="https://github.com/NNHAO2009" target="_blank" class="app-icon" onclick="appClick(this)">
                 <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
@@ -167,19 +133,13 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
     <script>
         // Hiệu ứng khi nhấp vào icon
         function appClick(iconElement) {
-            // Xóa hiệu ứng của các icon khác
             document.querySelectorAll('.app-icon').forEach(icon => {
                 icon.classList.remove('clicked');
             });
-
-            // Thêm hiệu ứng cho icon được nhấp vào
             iconElement.classList.add('clicked');
-
-            // Chờ 300ms rồi chuyển trang
             setTimeout(() => {
                 window.open(iconElement.href, '_blank');
             }, 300);
