@@ -32,6 +32,7 @@
             height: 100%;
         }
 
+        /* Container chính */
         .container {
             position: absolute;
             top: 50%;
@@ -39,35 +40,38 @@
             transform: translate(-50%, -50%);
             text-align: center;
             color: white;
+            z-index: 2;  /* Đảm bảo nội dung nằm trên video */
         }
 
+        /* Phần hình ảnh đại diện */
         .intro-hao {
             text-align: center;
-            align-items: center;
             display: flex;
-            text-align: center;
-            
+            justify-content: center;
+            margin-bottom: 20px; /* Khoảng cách giữa ảnh và văn bản */
         }
 
         .intro-image {
             width: 150px;
             height: 150px;
-            border-radius: 50%;
+            border-radius: 50%; /* Làm ảnh thành hình tròn */
             object-fit: cover;
-            margin-bottom: 20px;
-            display: flex;
+            border: 4px solid #fff; /* Thêm viền trắng cho ảnh */
         }
 
+        /* Tiêu đề */
         .container h1 {
             font-size: 3rem;
             margin-bottom: 20px;
         }
 
+        /* Nội dung văn bản */
         .container p {
             font-size: 1.2rem;
             margin-bottom: 30px;
         }
 
+        /* Các icon */
         .app-icons {
             display: flex;
             justify-content: center;
@@ -81,7 +85,7 @@
             border-radius: 50%;
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .app-icon img {
@@ -91,11 +95,11 @@
         }
 
         .app-icon:hover {
-            transform: scale(1.1);
+            transform: scale(1.1); /* Hiệu ứng khi hover */
         }
 
         .app-icon.clicked {
-            transform: scale(1.2);
+            transform: scale(1.2);  /* Hiệu ứng khi click */
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
     </style>
@@ -114,7 +118,9 @@
         Trình duyệt của bạn không hỗ trợ thẻ âm thanh.
     </audio>
 
+    <!-- Nội dung chính -->
     <div class="container">
+        <!-- Hình ảnh đại diện -->
         <div class="intro-hao">
             <img src="b0269bdb9b12ee094b20cfca762250a8.jpg" alt="Hình ảnh giới thiệu" class="intro-image">
         </div>
@@ -122,6 +128,7 @@
         <h1>HELLO!!!</h1>
         <p>Mình là một lập trình viên ngu và thích khám phá. Dưới đây là các trang web mình hay xem :)))</p>
 
+        <!-- Các icon -->
         <div class="app-icons">
             <a href="https://github.com/NNHAO2009" target="_blank" class="app-icon" onclick="appClick(this)">
                 <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
