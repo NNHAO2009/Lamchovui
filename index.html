@@ -194,7 +194,14 @@
                 videoBg.style.display = "block";
                 container.style.display = "block";
                 soundIcon.style.display = "block";
+                playMusic(); // Tự động phát nhạc
             }, 500);
+        }
+
+        function playMusic() {
+            audio.play();
+            soundIcon.innerHTML = "🔊";
+            isPlaying = true;
         }
 
         function toggleMusic(event) {
