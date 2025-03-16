@@ -12,8 +12,26 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
             font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Màn hình chờ */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: opacity 0.5s ease;
+            z-index: 10;
         }
 
         /* Video nền */
@@ -25,6 +43,7 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+            display: none;
         }
 
         /* Container chính */
@@ -36,11 +55,11 @@
             text-align: center;
             color: white;
             z-index: 2;
+            display: none;
         }
 
-        /* Phần hình ảnh đại diện */
+        /* Hình ảnh đại diện */
         .intro-hao {
-            text-align: center;
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
@@ -54,13 +73,12 @@
             border: 4px solid #fff;
         }
 
-        /* Tiêu đề */
+        /* Nội dung văn bản */
         .container h1 {
             font-size: 3rem;
             margin-bottom: 20px;
         }
 
-        /* Nội dung văn bản */
         .container p {
             font-size: 1.2rem;
             margin-bottom: 30px;
@@ -78,7 +96,6 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            overflow: hidden;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -93,11 +110,6 @@
             transform: scale(1.1);
         }
 
-        .app-icon.clicked {
-            transform: scale(1.2);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-
         /* Biểu tượng âm thanh */
         .sound-icon {
             position: fixed;
@@ -110,21 +122,24 @@
             border-radius: 50%;
             cursor: pointer;
             user-select: none;
+            display: none;
         }
 
-        /* Hiệu ứng icon khi nhấn */
         .sound-icon:active {
             transform: scale(0.9);
         }
-
     </style>
 </head>
-<body onclick="toggleMusic()">
+<body>
+
+    <!-- Màn hình chờ -->
+    <div class="overlay" onclick="startWebsite()">
+        Click to here
+    </div>
 
     <!-- Video nền -->
     <video class="video-background" autoplay loop muted>
         <source src="bronya-and-seele-honkai-impact-3-wallpaperwaifu-com (1).mp4" type="video/mp4">
-        Trình duyệt của bạn không hỗ trợ thẻ video.
     </video>
 
     <!-- Nội dung chính -->
@@ -139,16 +154,16 @@
 
         <!-- Các icon -->
         <div class="app-icons">
-            <a href="https://github.com/NNHAO2009" target="_blank" class="app-icon" onclick="appClick(this)">
+            <a href="https://github.com/NNHAO2009" target="_blank" class="app-icon">
                 <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
             </a>
-            <a href="https://discord.com/users/1125421225804570695" target="_blank" class="app-icon" onclick="appClick(this)">
+            <a href="https://discord.com/users/1125421225804570695" target="_blank" class="app-icon">
                 <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
             </a>
-            <a href="https://www.tiktok.com/@kirahetor2009" target="_blank" class="app-icon" onclick="appClick(this)">
+            <a href="https://www.tiktok.com/@kirahetor2009" target="_blank" class="app-icon">
                 <img src="https://cdn-icons-png.flaticon.com/512/3046/3046127.png" alt="TikTok">
             </a>
-            <a href="https://www.facebook.com/your-facebook-profile" target="_blank" class="app-icon" onclick="appClick(this)">
+            <a href="https://www.facebook.com/your-facebook-profile" target="_blank" class="app-icon">
                 <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" alt="Facebook">
             </a>
         </div>
@@ -162,16 +177,27 @@
     <!-- Nhạc nền -->
     <audio id="background-music" loop>
         <source src="https://raw.githubusercontent.com/NNHAO2009/Lamchovui/25fcc80ea6ba9cb13bb7591fe2587d09bacaee6f/Snaptik.app_7467589860937813266.mp3" type="audio/mp3">
-        Trình duyệt của bạn không hỗ trợ thẻ âm thanh.
     </audio>
 
     <script>
         let isPlaying = false;
         const audio = document.getElementById('background-music');
         const soundIcon = document.querySelector('.sound-icon');
+        const overlay = document.querySelector('.overlay');
+        const videoBg = document.querySelector('.video-background');
+        const container = document.querySelector('.container');
+
+        function startWebsite() {
+            overlay.style.opacity = "0";
+            setTimeout(() => {
+                overlay.style.display = "none";
+                videoBg.style.display = "block";
+                container.style.display = "block";
+                soundIcon.style.display = "block";
+            }, 500);
+        }
 
         function toggleMusic(event) {
-            // Ngăn không cho click vào biểu tượng âm thanh gây lỗi
             if (event.target.classList.contains("sound-icon")) {
                 event.stopPropagation();
             }
@@ -184,17 +210,6 @@
                 soundIcon.innerHTML = "🔊";
             }
             isPlaying = !isPlaying;
-        }
-
-        // Hiệu ứng khi nhấp vào icon
-        function appClick(iconElement) {
-            document.querySelectorAll('.app-icon').forEach(icon => {
-                icon.classList.remove('clicked');
-            });
-            iconElement.classList.add('clicked');
-            setTimeout(() => {
-                window.open(iconElement.href, '_blank');
-            }, 300);
         }
     </script>
 
