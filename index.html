@@ -102,6 +102,11 @@
             width: 50px;
             height: 50px;
             cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .music-control:active {
+            transform: scale(0.9);
         }
 
         /* Màn hình chờ */
@@ -147,48 +152,54 @@
         <h1>HELLO!!!</h1>
         <p>Mình là một lập trình viên ngu và thích khám phá. Dưới đây là các trang web mình hay xem :)))</p>
 
-       <!-- Các icon -->
+        <!-- Các icon -->
         <div class="app-icons">
-            <a href="https://github.com/NNHAO2009" target="_blank" class="app-icon" onclick="appClick(this)">
+            <a href="https://github.com/NNHAO2009" target="_blank" class="app-icon">
                 <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
             </a>
-            <a href="https://discord.com/users/1125421225804570695" target="_blank" class="app-icon" onclick="appClick(this)">
+            <a href="https://discord.com/users/1125421225804570695" target="_blank" class="app-icon">
                 <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
             </a>
-            <a href="https://www.tiktok.com/@kirahetor2009" target="_blank" class="app-icon" onclick="appClick(this)">
+            <a href="https://www.tiktok.com/@kirahetor2009" target="_blank" class="app-icon">
                 <img src="https://cdn-icons-png.flaticon.com/512/3046/3046127.png" alt="TikTok">
             </a>
-            <a href="https://www.facebook.com/your-facebook-profile" target="_blank" class="app-icon" onclick="appClick(this)">
+            <a href="https://www.facebook.com/your-facebook-profile" target="_blank" class="app-icon">
                 <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" alt="Facebook">
+            </a>
+        </div>
+    </div>
 
     <!-- Điều khiển âm thanh -->
     <img src="cat-icon.png" alt="Bật/Tắt nhạc" class="music-control" onclick="toggleMusic()">
-<script>
-    let isPlaying = false;
+
+    <script>
+        let isPlaying = false;
         const audio = document.getElementById("background-music");
-        const soundIcon = document.querySelector(".sound-icon");
-        const splashScreen = document.querySelector(".splash-screen");
+        const welcomeScreen = document.querySelector(".welcome-screen");
+        const musicControl = document.querySelector(".music-control");
 
         // Bắt đầu trải nghiệm (ẩn màn hình chờ, mở nhạc)
         function startExperience() {
-            splashScreen.style.display = "none";
-            document.body.addEventListener("click", toggleMusic);
+            welcomeScreen.style.display = "none";
+            audio.play();
+            isPlaying = true;
+            updateMusicIcon();
         }
 
-        // Bật/tắt nhạc nền
-        function toggleMusic(event) {
-            if (event.target.classList.contains("sound-icon")) {
-                event.stopPropagation();
-            }
-
+        // Bật/tắt nhạc nền khi click icon
+        function toggleMusic() {
             if (isPlaying) {
                 audio.pause();
-                soundIcon.innerHTML = "🐱❌";
             } else {
                 audio.play();
-                soundIcon.innerHTML = "🐱";
             }
             isPlaying = !isPlaying;
+            updateMusicIcon();
+        }
+
+        // Cập nhật hình ảnh icon dựa vào trạng thái nhạc
+        function updateMusicIcon() {
+            musicControl.src = isPlaying ? "cat-icon-playing.png" : "cat-icon.png";
         }
     </script>
 
