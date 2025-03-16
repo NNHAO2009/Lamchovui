@@ -163,23 +163,32 @@
 
     <!-- Điều khiển âm thanh -->
     <img src="cat-icon.png" alt="Bật/Tắt nhạc" class="music-control" onclick="toggleMusic()">
+<script>
+    let isPlaying = false;
+        const audio = document.getElementById("background-music");
+        const soundIcon = document.querySelector(".sound-icon");
+        const splashScreen = document.querySelector(".splash-screen");
 
-    <script>
-        let isMusicPlaying = false;
-
-        function toggleMusic() {
-            const music = document.getElementById("background-music");
-            if (isMusicPlaying) {
-                music.pause();
-            } else {
-                music.play();
-            }
-            isMusicPlaying = !isMusicPlaying;
+        // Bắt đầu trải nghiệm (ẩn màn hình chờ, mở nhạc)
+        function startExperience() {
+            splashScreen.style.display = "none";
+            document.body.addEventListener("click", toggleMusic);
         }
 
-        function startExperience() {
-            document.querySelector(".welcome-screen").style.display = "none";
-            toggleMusic();
+        // Bật/tắt nhạc nền
+        function toggleMusic(event) {
+            if (event.target.classList.contains("sound-icon")) {
+                event.stopPropagation();
+            }
+
+            if (isPlaying) {
+                audio.pause();
+                soundIcon.innerHTML = "🐱❌";
+            } else {
+                audio.play();
+                soundIcon.innerHTML = "🐱";
+            }
+            isPlaying = !isPlaying;
         }
     </script>
 
