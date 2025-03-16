@@ -12,26 +12,24 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: Arial, sans-serif;
             overflow: hidden;
+            font-family: Arial, sans-serif;
+            cursor: url('https://cdn-icons-png.flaticon.com/128/10763/10763936.png'), auto; /* Con trỏ trái tim */
         }
 
         /* Màn hình chờ */
-        .overlay {
+        .splash-screen {
             position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             background: black;
+            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
             font-size: 2rem;
             cursor: pointer;
-            transition: opacity 0.5s ease;
-            z-index: 10;
+            z-index: 999;
         }
 
         /* Video nền */
@@ -43,7 +41,6 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
-            display: none;
         }
 
         /* Container chính */
@@ -55,11 +52,11 @@
             text-align: center;
             color: white;
             z-index: 2;
-            display: none;
         }
 
-        /* Hình ảnh đại diện */
+        /* Hình đại diện */
         .intro-hao {
+            text-align: center;
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
@@ -73,18 +70,17 @@
             border: 4px solid #fff;
         }
 
-        /* Nội dung văn bản */
-        .container h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
+        /* Icon điều khiển âm thanh */
+        .sound-icon {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10;
         }
 
-        .container p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-
-        /* Các icon */
+        /* Các icon mạng xã hội */
         .app-icons {
             display: flex;
             justify-content: center;
@@ -96,6 +92,7 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
+            overflow: hidden;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -109,42 +106,31 @@
         .app-icon:hover {
             transform: scale(1.1);
         }
-
-        /* Biểu tượng âm thanh */
-        .sound-icon {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-size: 2rem;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            user-select: none;
-            display: none;
-        }
-
-        .sound-icon:active {
-            transform: scale(0.9);
-        }
     </style>
 </head>
 <body>
 
     <!-- Màn hình chờ -->
-    <div class="overlay" onclick="startWebsite()">
+    <div class="splash-screen" onclick="startExperience()">
         Click to here
     </div>
 
     <!-- Video nền -->
     <video class="video-background" autoplay loop muted>
         <source src="bronya-and-seele-honkai-impact-3-wallpaperwaifu-com (1).mp4" type="video/mp4">
+        Trình duyệt của bạn không hỗ trợ thẻ video.
     </video>
+
+    <!-- Icon điều khiển âm thanh -->
+    <div class="sound-icon" onclick="toggleMusic(event)">🐱❌</div>
+
+    <!-- Âm thanh nền -->
+    <audio id="background-music" loop>
+        <source src="https://raw.githubusercontent.com/NNHAO2009/Lamchovui/25fcc80ea6ba9cb13bb7591fe2587d09bacaee6f/Snaptik.app_7467589860937813266.mp3" type="audio/mp3">
+    </audio>
 
     <!-- Nội dung chính -->
     <div class="container">
-        <!-- Hình ảnh đại diện -->
         <div class="intro-hao">
             <img src="b0269bdb9b12ee094b20cfca762250a8.jpg" alt="Hình ảnh giới thiệu" class="intro-image">
         </div>
@@ -152,7 +138,6 @@
         <h1>HELLO!!!</h1>
         <p>Mình là một lập trình viên ngu và thích khám phá. Dưới đây là các trang web mình hay xem :)))</p>
 
-        <!-- Các icon -->
         <div class="app-icons">
             <a href="https://github.com/NNHAO2009" target="_blank" class="app-icon">
                 <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
@@ -163,47 +148,25 @@
             <a href="https://www.tiktok.com/@kirahetor2009" target="_blank" class="app-icon">
                 <img src="https://cdn-icons-png.flaticon.com/512/3046/3046127.png" alt="TikTok">
             </a>
-            <a href="https://www.facebook.com/your-facebook-profile" target="_blank" class="app-icon">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" alt="Facebook">
+            <a href="https://www.facebook.com/your-profile" target="_blank" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook">
             </a>
         </div>
     </div>
 
-    <!-- Biểu tượng âm thanh -->
-    <div class="sound-icon" onclick="toggleMusic(event)">
-        🔇
-    </div>
-
-    <!-- Nhạc nền -->
-    <audio id="background-music" loop>
-        <source src="https://raw.githubusercontent.com/NNHAO2009/Lamchovui/25fcc80ea6ba9cb13bb7591fe2587d09bacaee6f/Snaptik.app_7467589860937813266.mp3" type="audio/mp3">
-    </audio>
-
     <script>
         let isPlaying = false;
-        const audio = document.getElementById('background-music');
-        const soundIcon = document.querySelector('.sound-icon');
-        const overlay = document.querySelector('.overlay');
-        const videoBg = document.querySelector('.video-background');
-        const container = document.querySelector('.container');
+        const audio = document.getElementById("background-music");
+        const soundIcon = document.querySelector(".sound-icon");
+        const splashScreen = document.querySelector(".splash-screen");
 
-        function startWebsite() {
-            overlay.style.opacity = "0";
-            setTimeout(() => {
-                overlay.style.display = "none";
-                videoBg.style.display = "block";
-                container.style.display = "block";
-                soundIcon.style.display = "block";
-                playMusic(); // Tự động phát nhạc
-            }, 500);
+        // Bắt đầu trải nghiệm (ẩn màn hình chờ, mở nhạc)
+        function startExperience() {
+            splashScreen.style.display = "none";
+            document.body.addEventListener("click", toggleMusic);
         }
 
-        function playMusic() {
-            audio.play();
-            soundIcon.innerHTML = "🔊";
-            isPlaying = true;
-        }
-
+        // Bật/tắt nhạc nền
         function toggleMusic(event) {
             if (event.target.classList.contains("sound-icon")) {
                 event.stopPropagation();
@@ -211,10 +174,10 @@
 
             if (isPlaying) {
                 audio.pause();
-                soundIcon.innerHTML = "🔇";
+                soundIcon.innerHTML = "🐱❌";
             } else {
                 audio.play();
-                soundIcon.innerHTML = "🔊";
+                soundIcon.innerHTML = "🐱";
             }
             isPlaying = !isPlaying;
         }
