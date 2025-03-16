@@ -14,6 +14,7 @@
             align-items: center;
             overflow: hidden;
             font-family: Arial, sans-serif;
+            cursor: pointer; /* Biến toàn bộ trang thành khu vực có thể click */
         }
 
         /* Video nền */
@@ -27,97 +28,28 @@
             z-index: -1;
         }
 
-        video {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Container chính */
-        .container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            z-index: 2;  /* Đảm bảo nội dung nằm trên video */
-        }
-
-        /* Phần hình ảnh đại diện */
-        .intro-hao {
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px; /* Khoảng cách giữa ảnh và văn bản */
-        }
-
-        .intro-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%; /* Làm ảnh thành hình tròn */
-            object-fit: cover;
-            border: 4px solid #fff; /* Thêm viền trắng cho ảnh */
-        }
-
-        /* Tiêu đề */
-        .container h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        /* Nội dung văn bản */
-        .container p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-
-        /* Các icon */
-        .app-icons {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .app-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-color: #3b5998; /* Màu nền của biểu tượng Facebook */
-        }
-
-        .app-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .app-icon:hover {
-            transform: scale(1.1); /* Hiệu ứng khi hover */
-        }
-
-        .app-icon.clicked {
-            transform: scale(1.2);  /* Hiệu ứng khi click */
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-
-        /* Điều khiển âm thanh */
-        audio {
+        /* Biểu tượng âm thanh */
+        .sound-icon {
             position: fixed;
-            bottom: 10px;  /* Đặt điều khiển âm thanh ở dưới cùng */
-            left: 50%;
-            transform: translateX(-50%);  /* Căn giữa */
-            background-color: rgba(0, 0, 0, 0.5);
+            bottom: 20px;
+            right: 20px;
+            font-size: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
             padding: 10px;
-            border-radius: 5px;
-            z-index: 3;  /* Đảm bảo điều khiển âm thanh nằm trên tất cả các phần tử */
+            border-radius: 50%;
+            cursor: pointer;
+            user-select: none;
         }
+
+        /* Hiệu ứng icon khi nhấn */
+        .sound-icon:active {
+            transform: scale(0.9);
+        }
+
     </style>
 </head>
-<body>
+<body onclick="toggleMusic()">
 
     <!-- Video nền -->
     <video class="video-background" autoplay loop muted>
@@ -125,58 +57,33 @@
         Trình duyệt của bạn không hỗ trợ thẻ video.
     </video>
 
-    <!-- Âm thanh nền (với điều khiển) -->
-    <audio autoplay loop controls>
+    <!-- Biểu tượng âm thanh -->
+    <div class="sound-icon" id="soundIcon">🔇</div>
+
+    <!-- Nhạc nền -->
+    <audio id="backgroundMusic" loop>
         <source src="https://raw.githubusercontent.com/NNHAO2009/Lamchovui/25fcc80ea6ba9cb13bb7591fe2587d09bacaee6f/Snaptik.app_7467589860937813266.mp3" type="audio/mp3">
         Trình duyệt của bạn không hỗ trợ thẻ âm thanh.
     </audio>
 
-    <!-- Nội dung chính -->
-    <div class="container">
-        <!-- Hình ảnh đại diện -->
-        <div class="intro-hao">
-            <img src="b0269bdb9b12ee094b20cfca762250a8.jpg" alt="Hình ảnh giới thiệu" class="intro-image">
-        </div>
-
-        <h1>HELLO!!!</h1>
-        <p>Mình là một lập trình viên ngu và thích khám phá. Dưới đây là các trang web mình hay xem :)))</p>
-
-        <!-- Các icon -->
-        <div class="app-icons">
-            <a href="https://github.com/NNHAO2009" target="_blank" class="app-icon" onclick="appClick(this)">
-                <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
-            </a>
-            <a href="https://discord.com/users/1125421225804570695" target="_blank" class="app-icon" onclick="appClick(this)">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
-            </a>
-            <a href="https://www.tiktok.com/@kirahetor2009" target="_blank" class="app-icon" onclick="appClick(this)">
-                <img src="https://cdn-icons-png.flaticon.com/512/3046/3046127.png" alt="TikTok">
-            </a>
-            <!-- Facebook -->
-            <a href="https://www.facebook.com/makusi.sukuri/" target="_blank" class="app-icon" onclick="appClick(this)">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
-            </a>
-        </div>
-    </div>
-
     <script>
-        // Hiệu ứng khi nhấp vào icon
-        function appClick(iconElement) {
-            document.querySelectorAll('.app-icon').forEach(icon => {
-                icon.classList.remove('clicked');
-            });
-            iconElement.classList.add('clicked');
-            setTimeout(() => {
-                window.open(iconElement.href, '_blank');
-            }, 300);
+        let isPlaying = false; // Biến trạng thái nhạc
+
+        function toggleMusic() {
+            const music = document.getElementById("backgroundMusic");
+            const soundIcon = document.getElementById("soundIcon");
+
+            if (isPlaying) {
+                music.pause();
+                soundIcon.innerHTML = "🔇"; // Biểu tượng loa tắt
+            } else {
+                music.play();
+                soundIcon.innerHTML = "🔊"; // Biểu tượng loa bật
+            }
+            
+            isPlaying = !isPlaying;
         }
     </script>
 
 </body>
 </html>
-
-
-
-
-
-
